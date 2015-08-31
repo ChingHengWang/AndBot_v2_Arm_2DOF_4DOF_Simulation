@@ -10,5 +10,5 @@
     $ roslaunch arm_description arm_rviz.launch
 
 ## sol ver.2
-    roslaunch arm_description arm_rviz_ver2.launch
+    $ roslaunch arm_description arm_rviz_ver2.launch
  
