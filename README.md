@@ -5,6 +5,7 @@
 2. shoulder link length 0.18 meter
 3. elbow link length 0.22 meter
 4. width of to arm 0.38 meter
+
 ## sol ver.1
     $ roslaunch arm_description arm_rviz.launch
 
