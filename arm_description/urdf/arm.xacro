@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!-- Revolute-Revolute Manipulator -->
+<robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="body_width_1" value=".18" />
+  <xacro:property name="body_width_2" value=".33" />   <!--  .38 - .05  -->
+
+  <xacro:property name="link_width" value="0.05" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="l_link_length_1" value=".18" /> <!-- Link 1 -->
+  <xacro:property name="l_link_length_2" value=".22" /> <!-- Link 1 -->
+
+  <xacro:property name="r_link_length_2" value=".18" /> <!-- Link 1 -->
+  <xacro:property name="r_link_length_4" value=".22" /> <!-- Link 1 -->
+
+  <xacro:property name="body_height" value="0.7" />  <!-- 1.3 -0.4 --> 
+  <xacro:property name="height1" value="2" /> <!-- Link 1 -->
+  <xacro:property name="height2" value="1" /> <!-- Link 2 -->
+  <xacro:property name="height3" value="1" /> <!-- Link 3 -->
+  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+  <xacro:property name="axel_offset" value="0" /> <!-- Space btw top of beam and the each joint -->
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find arm_description)/urdf/arm.gazebo" />
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find arm_description)/urdf/materials.xacro" />
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <collision>
+      <origin xyz="0 0 ${body_height/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${body_width_1} ${body_width_2} ${body_height}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${body_height/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${body_width_1} ${body_width_2} ${body_height}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+  </link>
+
+  <joint name="r_joint1" type="continuous">
+    <parent link="base_link"/>
+    <child link="r_s_link_1"/>
+    <origin xyz="0 ${.38/2} ${body_height}" rpy="0 ${PI} 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <link name="r_s_link_1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0 0 0"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0 0 0"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+  </link>
+
+
+
+  <joint name="r_joint2" type="continuous">
+    <parent link="r_s_link_1"/>
+    <child link="r_s_link_2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+
+  <link name="r_s_link_2">
+    <collision>
+      <origin xyz="0 0 ${r_link_length_2/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${r_link_length_2}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${r_link_length_2/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${r_link_length_2}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+  </link>
+
+  <joint name="r_joint3" type="continuous">
+    <parent link="r_s_link_2"/>
+    <child link="r_s_link_3"/>
+    <origin xyz="0 0 ${r_link_length_2}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <link name="r_s_link_3">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0 0 0"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+
+  </link>
+
+  <joint name="r_joint4" type="continuous">
+    <parent link="r_s_link_3"/>
+    <child link="r_s_link_4"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+
+  <link name="r_s_link_4">
+    <collision>
+      <origin xyz="0 0 ${r_link_length_4/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${r_link_length_4}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${r_link_length_4/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${r_link_length_4}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+
+  </link>
+
+
+
+
+
+
+<!-- Left Arm-->
+  <joint name="l_joint1" type="continuous">
+    <parent link="base_link"/>
+    <child link="l_s_link_1"/>
+    <origin xyz="0 -0.19 ${body_height}" rpy="0 ${PI} 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <link name="l_s_link_1">
+    <collision>
+      <origin xyz="0 0 ${l_link_length_1/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${l_link_length_1}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${l_link_length_1/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${l_link_length_1}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+  </link>
+
+  <joint name="l_joint2" type="continuous">
+    <parent link="l_s_link_1"/>
+    <child link="l_s_link_2"/>
+    <origin xyz="0 0 ${l_link_length_1}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <link name="l_s_link_2">
+    <collision>
+      <origin xyz="0 0 ${l_link_length_2/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${l_link_length_2}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${l_link_length_2/2}" rpy="0 0 0"/>
+      <geometry>
+	<box size="${link_width} ${link_width} ${l_link_length_2}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+
+  </link>
+
+</robot>
