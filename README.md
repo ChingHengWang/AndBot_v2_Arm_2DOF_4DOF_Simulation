@@ -1,5 +1,4 @@
-# arms design simulation for Andbot
-
+# AndBot_v2_Arm_2DOF_4DOF_Simulation
 ## mechanical parameters
 1. 2DOF + 4 DOF manipulator
 2. shoulder link length 0.18 meter
