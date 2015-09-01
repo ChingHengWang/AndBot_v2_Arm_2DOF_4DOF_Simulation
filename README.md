@@ -6,9 +6,10 @@
 3. elbow link length 0.22 meter
 4. width of to arm 0.38 meter
 
-## sol.1
+## sim.1 (LS1, LE1,  RS1, RS2, RE1, RW1)
     $ roslaunch arm_description arm_rviz.launch
 
-## sol.2
+
+## sim.2 (LS1, LE1, RS1, RS2, RE1, RE2)
     $ roslaunch arm_description arm_rviz_ver2.launch
  
