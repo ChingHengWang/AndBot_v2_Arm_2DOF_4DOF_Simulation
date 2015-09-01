@@ -12,4 +12,7 @@
 
 ## sim.2 (LS1, LE1, RS1, RS2, RE1, RE2)
     $ roslaunch arm_description arm_rviz_ver2.launch
+
+## sim.3 ( L1, LS2, LE1, LE2, RS1, RS2, RE1, RE2)
+    $ roslaunch arm_description arm_rviz_ver3.launch
  
